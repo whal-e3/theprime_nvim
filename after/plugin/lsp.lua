@@ -5,14 +5,12 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.ensure_installed({
-	'tsserver',
 	'pyright',
 	'clangd'
 })
 
--- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
-
+-- -- (Optional) Configure lua language server for neovim
+-- require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

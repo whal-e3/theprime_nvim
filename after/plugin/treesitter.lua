@@ -1,6 +1,15 @@
+vim.cmd([[packadd nvim-treesitter]])
+local ok, configs = pcall(require, "nvim-treesitter.configs")
+if not ok then return end
+
+configs.setup({
+  highlight = { enable = true },
+  indent = { enable = true },
+})
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "javascript", "typescript", "c", "lua", "vim", "query" },
+  ensure_installed = { "javascript", "typescript", "c", "vim", "query" },
   -- help has been removed from ensure_installed
 
   -- Install parsers synchronously (only applied to `ensure_installed`)

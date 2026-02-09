@@ -26,9 +26,8 @@ return require('packer').startup(function(use)
 
   use {
       'nvim-treesitter/nvim-treesitter',
-      {run = ':TSUpdate'},
+      run = ':TSUpdate',
   }
-  use( 'nvim-treesitter/playground' )
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -42,7 +41,7 @@ return require('packer').startup(function(use)
 			  pcall(vim.cmd, 'MasonUpdate')
 		  end,
 	  },
-	  {'williamboman/mason-lspconfig.nvim'}, -- Optional
+	  -- {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
 	  -- Autocompletion
 	  {'hrsh7th/nvim-cmp'},     -- Required
