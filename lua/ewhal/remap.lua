@@ -1,51 +1,96 @@
-vim.g.mapleader = " "
+-- NOTE: leader is set in set.lua as <Space>
 
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+-- File explorer (like VSCode sidebar toggle)
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+vim.keymap.set("n", "<leader>o", "<cmd>NvimTreeFocus<CR>", { desc = "Focus file explorer" })
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- Move selected lines up/down (Alt+Up/Down like VSCode)
+vim.keymap.set("n", "<A-j>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
+-- Duplicate lines (like VSCode Alt+Shift+Down/Up)
+vim.keymap.set("n", "<A-S-j>", "<cmd>t .<CR>", { desc = "Duplicate line down" })
+vim.keymap.set("n", "<A-S-k>", "<cmd>t .-1<CR>", { desc = "Duplicate line up" })
+vim.keymap.set("v", "<A-S-j>", ":'<,'>t '><CR>gv", { desc = "Duplicate selection down" })
+vim.keymap.set("v", "<A-S-k>", ":'<,'>t '<-1<CR>gv", { desc = "Duplicate selection up" })
+
+-- Keep cursor centered on scroll/search
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("n", "<leader>vwm", function()
-    require("vim-with-me").StartVimWithMe()
-end)
-vim.keymap.set("n", "<leader>svwm", function()
-    require("vim-with-me").StopVimWithMe()
-end)
+-- Paste without overwriting register (in visual mode)
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without yanking" })
 
--- greatest remap ever
-vim.keymap.set("x", "<leader>p", [["_dP]])
+-- Delete without yanking
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking" })
 
--- Linking yank to the system clipboard
-vim.keymap.set("n", "y", "\"+y")
-vim.keymap.set("v", "y", "\"+y")
-vim.keymap.set("n", "Y", "\"+Y")
+-- Copy/Paste (Ctrl+C / Ctrl+V like VSCode)
+vim.keymap.set("v", "<C-c>", '"+y', { desc = "Copy" })
+vim.keymap.set({ "n", "v" }, "<C-v>", '"+p', { desc = "Paste" })
+vim.keymap.set("i", "<C-v>", '<C-r>+', { desc = "Paste" })
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
-
--- This is going to get me cancelled
-vim.keymap.set("i", "<C-c>", "<Esc>")
-
+-- Disable Q (ex mode)
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+-- Format (like VSCode Shift+Alt+F)
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format document" })
+vim.keymap.set("n", "<A-S-f>", vim.lsp.buf.format, { desc = "Format document" })
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- Quickfix / location list navigation
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Prev quickfix" })
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location" })
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location" })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
+-- Search and replace word under cursor (like VSCode Ctrl+H with selection)
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under cursor" })
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end)
+-- Make file executable
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file executable" })
+
+-- Source current file
+vim.keymap.set("n", "<leader><leader>", function() vim.cmd("so") end, { desc = "Source file" })
+
+-- Save (Ctrl+S like VSCode)
+vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR><Esc>", { desc = "Save file" })
+
+-- Undo/Redo (Ctrl+Z / Ctrl+Y like VSCode)
+vim.keymap.set("n", "<C-z>", "u", { desc = "Undo" })
+vim.keymap.set("n", "<C-y>", "<C-r>", { desc = "Redo" })
+vim.keymap.set("i", "<C-z>", "<C-o>u", { desc = "Undo" })
+vim.keymap.set("i", "<C-y>", "<C-o><C-r>", { desc = "Redo" })
+
+-- Select all (Ctrl+A like VSCode)
+vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all" })
+
+-- Indent/outdent in visual mode (keep selection)
+vim.keymap.set("v", "<", "<gv", { desc = "Outdent" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent" })
+vim.keymap.set("v", "<Tab>", ">gv", { desc = "Indent" })
+vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Outdent" })
+
+-- Window/split navigation (Ctrl+hjkl)
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left split" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
+
+-- Buffer navigation (like VSCode tabs)
+vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader>bD", "<cmd>%bdelete<CR>", { desc = "Close all tabs" })
+
+-- Terminal toggle (like VSCode Ctrl+`)
+vim.keymap.set("n", "<C-`>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+vim.keymap.set("t", "<C-`>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Comment toggle (gcc/gc in visual) is handled by Comment.nvim plugin
+
+-- Python shortcuts
+vim.api.nvim_set_keymap('n', '<leader>py', [[:normal! i#!/usr/bin/env python3<ESC>]], { noremap = true, silent = true, desc = "Insert python shebang" })
+vim.api.nvim_set_keymap('n', '<leader>pw', [[:normal! ifrom pwn import *<ESC>]], { noremap = true, silent = true, desc = "Insert pwn import" })
