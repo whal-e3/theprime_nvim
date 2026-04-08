@@ -89,6 +89,8 @@ In the tree: `a` = new file, `d` = delete, `r` = rename, `c` = copy, `p` = paste
 | Keybinding | Action |
 |---|---|
 | `Space cc` | Toggle Claude Code |
+| `Space cr` | Resume Claude Code session |
+| `Ctrl+H` / `Ctrl+L` | Switch focus between file and Claude Code split |
 
 ### Code Editing (like VSCode)
 
