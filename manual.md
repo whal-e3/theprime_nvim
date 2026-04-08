@@ -7,9 +7,6 @@ When you open `nvim` for the first time, **lazy.nvim** will auto-bootstrap and i
 Make sure you have these prerequisites installed:
 
 ```bash
-# Nerd Font (needed for icons) - install one from https://www.nerdfonts.com/
-# Then set your terminal to use it.
-
 # Build tools (for telescope-fzf-native)
 sudo apt install -y build-essential
 
@@ -18,6 +15,17 @@ sudo apt install -y nodejs npm
 
 # ripgrep (for live grep in telescope)
 sudo apt install -y ripgrep
+
+# Nerd Font (needed for icons)
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+curl -fLO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
+tar -xf JetBrainsMono.tar.xz
+rm JetBrainsMono.tar.xz
+fc-cache -fv
+# Then set your terminal to use "JetBrainsMono Nerd Font Mono":
+#   GNOME Terminal: Preferences → Profile → Custom font
+#   Konsole: Settings → Edit Profile → Appearance → Font
 ```
 
 ---

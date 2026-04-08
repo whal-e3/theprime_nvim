@@ -12,6 +12,13 @@ Personal neovim setup with VSCode-like keybindings and UX. Originally based on [
 
 ```bash
 sudo apt install -y build-essential nodejs npm ripgrep
+
+# Install Nerd Font (needed for icons)
+mkdir -p ~/.local/share/fonts && cd ~/.local/share/fonts
+curl -fLO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
+tar -xf JetBrainsMono.tar.xz && rm JetBrainsMono.tar.xz
+fc-cache -fv
+# Then set your terminal font to "JetBrainsMono Nerd Font Mono"
 ```
 
 ## Install
