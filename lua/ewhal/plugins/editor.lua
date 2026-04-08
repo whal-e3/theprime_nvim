@@ -72,6 +72,25 @@ return {
         },
     },
 
+    -- Claude Code integration
+    {
+        "greggh/claude-code.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require("claude-code").setup({
+                command = "claude --continue",
+                window = {
+                    position = "vertical",
+                    width = 80,
+                },
+            })
+        end,
+        keys = {
+            { "<leader>cc", "<cmd>ClaudeCode<CR>", desc = "Toggle Claude Code" },
+            { "<leader>cr", "<cmd>ClaudeCode --resume<CR>", desc = "Claude Code resume session" },
+        },
+    },
+
     -- Highlight color codes (like VSCode color preview)
     {
         "norcalli/nvim-colorizer.lua",

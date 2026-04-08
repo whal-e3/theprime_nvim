@@ -78,15 +78,21 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Outdent" })
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left split" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
 
+-- Resize splits (Ctrl+Arrow keys)
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +5<CR>", { desc = "Increase split width" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -5<CR>", { desc = "Decrease split width" })
+vim.keymap.set("n", "<C-Up>", "<cmd>resize +3<CR>", { desc = "Increase split height" })
+vim.keymap.set("n", "<C-Down>", "<cmd>resize -3<CR>", { desc = "Decrease split height" })
+
 -- Buffer navigation (like VSCode tabs)
 vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "<leader>bD", "<cmd>%bdelete<CR>", { desc = "Close all tabs" })
 
--- Terminal toggle (like VSCode Ctrl+`)
-vim.keymap.set("n", "<C-`>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
-vim.keymap.set("t", "<C-`>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+-- Terminal toggle (Ctrl+` doesn't work in most terminals, use C-\ instead)
+vim.keymap.set("n", "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+vim.keymap.set("t", "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Comment toggle (gcc/gc in visual) is handled by Comment.nvim plugin

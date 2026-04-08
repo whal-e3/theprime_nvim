@@ -59,6 +59,15 @@ sudo apt install -y ripgrep
 
 In the tree: `a` = new file, `d` = delete, `r` = rename, `c` = copy, `p` = paste.
 
+### Split Resizing
+
+| Keybinding | Action |
+|---|---|
+| `Ctrl+Right` | Increase split width |
+| `Ctrl+Left` | Decrease split width |
+| `Ctrl+Up` | Increase split height |
+| `Ctrl+Down` | Decrease split height |
+
 ### Tabs / Buffers (like VSCode Tabs)
 
 | Keybinding | Action |
@@ -72,8 +81,14 @@ In the tree: `a` = new file, `d` = delete, `r` = rename, `c` = copy, `p` = paste
 
 | Keybinding | Action |
 |---|---|
-| `` Ctrl+` `` | Toggle terminal |
+| `Ctrl+\` | Toggle terminal |
 | `Esc` | Exit terminal mode back to normal |
+
+### Claude Code
+
+| Keybinding | Action |
+|---|---|
+| `Space cc` | Toggle Claude Code |
 
 ### Code Editing (like VSCode)
 
